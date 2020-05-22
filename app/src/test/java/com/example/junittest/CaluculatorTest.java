@@ -17,11 +17,11 @@ public class CaluculatorTest {
 
     @Test
     public void testSum() throws Exception {
-        assertEquals(2, mCaluculator.sum(1,6), 0);
+        assertEquals(7, mCaluculator.sum(1,6), 0);
     }
 
     @Test
     public void testSubstract() throws Exception {
-        assertEquals(3, mCaluculator.substract(5,3), 0);
+        assertEquals(2, mCaluculator.substract(5,3), 0);
     }
 }

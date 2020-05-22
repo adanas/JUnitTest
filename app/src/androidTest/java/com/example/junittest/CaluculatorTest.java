@@ -29,6 +29,7 @@ public class CaluculatorTest {
 
     @Before
     public void setUp() throws Exception {
+        // インスタンス生成
         mCaluculator = new Caluculator();
     }
 

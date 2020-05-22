@@ -35,7 +35,7 @@ public class CaluculatorTest {
 
     @Test
     public void testSum() throws Exception {
-        assertEquals(7, mCaluculator.sum(1,6), 0);
+        assertEquals(2, mCaluculator.sum(1,6), 0);
     }
 
     @Test

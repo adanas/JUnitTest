@@ -1,4 +1,35 @@
 apply plugin: 'com.android.application'
+apply plugin: 'jacoco'
+
+// add start
+// カバレッジ測定タスク
+task jacoco(type: JacocoReport, dependsOn: "testDebug") {
+    reports {
+        // CIツール上で実行する場合
+        xml.enabled = true
+        html.enabled = false
+        xml {
+            destination "${project.rootDir}/build/reports/jacoco/${project.name}/jacoco_report.xml"
+        }
+        // AndroidStudioでタスクを単体実行する場合
+//        xml.enabled = false
+//        html.enabled = true
+//        html {
+//            destination "${project.rootDir}/build/reports/jacoco/${project.name}"
+//        }
+    }
+    classDirectories = fileTree(
+            dir: './build/intermediates/classes/debug',
+            excludes: ['**/R.class',
+                       '**/R$*.class',
+                       '**/BuildConfig.class',
+                       '**/*Gen.class',
+            ])
+    sourceDirectories = files('src/main/java')
+    executionData = files('build/jacoco/testDebug.exec')
+}
+
+// add end
 
 android {
     compileSdkVersion 29

@@ -1,5 +1,5 @@
 apply plugin: 'com.android.application'
-apply plugin: 'jacoco'
+apply plugin: 'jacoco' // for jacoco
 
 android {
     compileSdkVersion 29
@@ -34,8 +34,10 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 }
 
+// for jacoco start
 jacoco {
-    toolVersion = "0.7.+"
+    //toolVersion = "0.7.+"
+    toolVersion = "0.7.4.201502262128"
     // reportDir = file("$buildDir/reports/jacoco")
 }
 
@@ -53,3 +55,4 @@ task jacoco(type: JacocoReport, dependsOn: 'testDebug') {
     sourceDirectories = files('src/main/java')
     executionData = files('build/jacoco/testDebug.exec')
 }
+// for jacoco end

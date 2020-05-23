@@ -24,4 +24,9 @@ public class CaluculatorTest {
     public void testSubstract() throws Exception {
         assertEquals(2, mCaluculator.substract(5,3), 0);
     }
+
+    @Test
+    public void testDivide() throws Exception {
+        assertEquals(5, mCaluculator.divide(10,2), 0);
+    }
 }

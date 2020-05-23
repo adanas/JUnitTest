@@ -1,36 +1,6 @@
 apply plugin: 'com.android.application'
 apply plugin: 'jacoco'
 
-// add start
-// カバレッジ測定タスク
-task jacoco(type: JacocoReport, dependsOn: "testDebug") {
-    reports {
-        // CIツール上で実行する場合
-        xml.enabled = true
-        html.enabled = false
-        xml {
-            destination "${project.rootDir}/build/reports/jacoco/${project.name}/jacoco_report.xml"
-        }
-        // AndroidStudioでタスクを単体実行する場合
-//        xml.enabled = false
-//        html.enabled = true
-//        html {
-//            destination "${project.rootDir}/build/reports/jacoco/${project.name}"
-//        }
-    }
-    classDirectories = fileTree(
-            dir: './build/intermediates/classes/debug',
-            excludes: ['**/R.class',
-                       '**/R$*.class',
-                       '**/BuildConfig.class',
-                       '**/*Gen.class',
-            ])
-    sourceDirectories = files('src/main/java')
-    executionData = files('build/jacoco/testDebug.exec')
-}
-
-// add end
-
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.3"
@@ -62,4 +32,24 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+}
+
+jacoco {
+    toolVersion = "0.7.+"
+    // reportDir = file("$buildDir/reports/jacoco")
+}
+
+task jacoco(type: JacocoReport, dependsOn: 'testDebug') {
+    reports {
+        xml.enabled = true
+        html.enabled = true
+    }
+    classDirectories = fileTree(
+            dir: './build/intermediates/classes/debug',
+            excludes: ['**/R.class',
+                       '**/R$*.class',
+                       '**/BuildConfig.class',
+            ])
+    sourceDirectories = files('src/main/java')
+    executionData = files('build/jacoco/testDebug.exec')
 }
